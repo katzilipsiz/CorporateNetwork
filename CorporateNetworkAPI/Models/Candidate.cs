@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+
 
 namespace CorporateNetwork.Models
 {
@@ -10,20 +12,21 @@ namespace CorporateNetwork.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CandidateNumber { get; set; }
 
+        [Required]
         [MaxLength(200)]
-        public required string FullName { get; set; }
+        public string FullName { get; set; }
 
         [MaxLength(20)]
-        public required string Phone { get; set; }
+        public string? Phone { get; set; }
 
         [MaxLength(50)]
-        public required string Passport { get; set; }
+        public string? Passport { get; set; }
 
         [MaxLength(20)]
-        public required string Snils { get; set; }
+        public string? Snils { get; set; }
 
         [MaxLength(20)]
-        public required string Inn { get; set; }
+        public string? Inn { get; set; }
 
         [MaxLength(100)]
         public string? Email { get; set; }
@@ -31,6 +34,7 @@ namespace CorporateNetwork.Models
         public string? AdditionalInfo { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Interview> Interviews { get; set; }
+        [ValidateNever]
+ public virtual ICollection<Interview> Interviews { get; set; }
     }
 }

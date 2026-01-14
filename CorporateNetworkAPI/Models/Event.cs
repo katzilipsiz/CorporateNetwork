@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -10,21 +11,34 @@ namespace CorporateNetwork.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EventCode { get; set; }
 
+        [Required]
         [MaxLength(200)]
-        public required string EventName { get; set; }
-        public required int StatusCode { get; set; }
-        public required int TypeCode { get; set; }
-        public required DateTime EventDateTime { get; set; }
+        public string EventName { get; set; }
+
+        [Required]
+        public int StatusCode { get; set; }
+
+        [Required]
+        public int TypeCode { get; set; }
+
+        [Required]
+        public DateTime EventDateTime { get; set; }
 
         [MaxLength(500)]
         public string? ShortDescription { get; set; }
+
         [JsonIgnore]
         [ForeignKey("StatusCode")]
-        public virtual required EventStatus EventStatus { get; set; }
+        [ValidateNever]
+ public virtual EventStatus EventStatus { get; set; }
+
         [JsonIgnore]
         [ForeignKey("TypeCode")]
-        public virtual required EventType EventType { get; set; }
+        [ValidateNever]
+ public virtual EventType EventType { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<EventResponsible> EventResponsibles { get; set; }
+        [ValidateNever]
+ public virtual ICollection<EventResponsible> EventResponsibles { get; set; }
     }
 }

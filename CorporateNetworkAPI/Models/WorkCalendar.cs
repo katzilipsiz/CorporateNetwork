@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -9,9 +10,15 @@ namespace CorporateNetwork.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DayCode { get; set; }
-        public required DateTime CalendarDate { get; set; }
-        public required bool IsWorkingDay { get; set; } = true;
+
+        [Required]
+        public DateTime CalendarDate { get; set; }
+
+        [Required]
+        public bool IsWorkingDay { get; set; } = true;
+
         [JsonIgnore]
-        public virtual ICollection<WorkSchedule> WorkSchedules { get; set; }
+        [ValidateNever]
+ public virtual ICollection<WorkSchedule> WorkSchedules { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -9,14 +10,24 @@ namespace CorporateNetwork.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TrainingCode { get; set; }
-        public required DateTime TrainingDate { get; set; }
-        public required int EmployeeID { get; set; }
+
+        [Required]
+        public DateTime TrainingDate { get; set; }
+
+        [Required]
+        public int EmployeeID { get; set; }
+
         [JsonIgnore]
         [ForeignKey("EmployeeID")]
-        public virtual required Employee Employee { get; set; }
+        [ValidateNever]
+ public virtual Employee Employee { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<TrainingMaterial> TrainingMaterials { get; set; }
+        [ValidateNever]
+ public virtual ICollection<TrainingMaterial> TrainingMaterials { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<WorkSchedule> WorkSchedules { get; set; }
+        [ValidateNever]
+ public virtual ICollection<WorkSchedule> WorkSchedules { get; set; }
     }
 }

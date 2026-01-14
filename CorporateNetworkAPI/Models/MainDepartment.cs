@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -13,9 +11,12 @@ namespace CorporateNetwork.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MainDepartmentCode { get; set; }
 
+        [Required]
         [MaxLength(100)]
-        public required string MainDepartmentName { get; set; }
+        public string MainDepartmentName { get; set; }
+
         [JsonIgnore]
+        [ValidateNever]
         public virtual ICollection<Department> Departments { get; set; }
     }
 }

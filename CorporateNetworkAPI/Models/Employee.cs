@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -10,12 +11,15 @@ namespace CorporateNetwork.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PersonalNumber { get; set; }
 
+        [Required]
         [MaxLength(200)]
-        public required string FullName { get; set; }
+        public string FullName { get; set; }
 
-        public required int DepartmentCode { get; set; }
+        [Required]
+        public int DepartmentCode { get; set; }
 
-        public required int PositionCode { get; set; }
+        [Required]
+        public int PositionCode { get; set; }
 
         [MaxLength(20)]
         public string? WorkPhone { get; set; }
@@ -31,30 +35,48 @@ namespace CorporateNetwork.Models
 
         public DateTime? BirthDate { get; set; }
 
+        [Required]
         [MaxLength(255)]
-        public required string PasswordHash { get; set; }
+        public string PasswordHash { get; set; }
 
         public string? AdditionalInfo { get; set; }
 
         [JsonIgnore]
         [ForeignKey("DepartmentCode")]
-        public virtual required Department Department { get; set; }
+        [ValidateNever]
+ public virtual Department Department { get; set; }
+
         [JsonIgnore]
         [ForeignKey("PositionCode")]
-        public virtual required Position Position { get; set; }
+        [ValidateNever]
+ public virtual Position Position { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<DepartmentStructure> DepartmentStructures { get; set; }
+        [ValidateNever]
+ public virtual ICollection<DepartmentStructure> DepartmentStructures { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<Interview> Interviews { get; set; }
+        [ValidateNever]
+ public virtual ICollection<Interview> Interviews { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<VacationCalendar> VacationCalendars { get; set; }
+        [ValidateNever]
+ public virtual ICollection<VacationCalendar> VacationCalendars { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<DayOffCalendar> DayOffCalendars { get; set; }
+        [ValidateNever]
+ public virtual ICollection<DayOffCalendar> DayOffCalendars { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<TrainingCalendar> TrainingCalendars { get; set; }
+        [ValidateNever]
+ public virtual ICollection<TrainingCalendar> TrainingCalendars { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<MaterialAuthor> MaterialAuthors { get; set; }
+        [ValidateNever]
+ public virtual ICollection<MaterialAuthor> MaterialAuthors { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<EventResponsible> EventResponsibles { get; set; }
+        [ValidateNever]
+ public virtual ICollection<EventResponsible> EventResponsibles { get; set; }
     }
 }

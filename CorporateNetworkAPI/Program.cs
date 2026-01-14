@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -86,6 +87,32 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    try
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var connection = dbContext.Database.GetDbConnection();
+        await connection.OpenAsync();
+
+        var command = connection.CreateCommand();
+        command.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
+
+        using (var reader = await command.ExecuteReaderAsync())
+        {
+            Console.WriteLine("📋 Таблицы в базе данных:");
+            while (await reader.ReadAsync())
+            {
+                Console.WriteLine($"   - {reader[0]}");
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"❌ Ошибка при проверке таблиц: {ex.Message}");
+    }
+}
+
 // Configure the HTTP request pipeline.
 // ВКЛЮЧАЕМ SWAGGER В ЛЮБОЙ СРЕДЕ (Development/Production)
 app.UseSwagger();
@@ -103,6 +130,8 @@ if (!app.Environment.IsDevelopment())
 {
     Console.WriteLine("⚠️  WARNING: Running in non-development environment with Swagger enabled!");
 }
+
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

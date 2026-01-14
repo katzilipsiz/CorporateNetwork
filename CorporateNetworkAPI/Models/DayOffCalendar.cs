@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -10,15 +11,19 @@ namespace CorporateNetwork.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DayOffCode { get; set; }
 
-        public required DateTime OffDate { get; set; }
+        [Required]
+        public DateTime OffDate { get; set; }
 
-        public required int EmployeeID { get; set; }
+        [Required]
+        public int EmployeeID { get; set; }
 
+        [Required]
         [MaxLength(500)]
-        public required string Reason { get; set; }
+        public string Reason { get; set; }
 
         [JsonIgnore]
         [ForeignKey("EmployeeID")]
-        public virtual Employee Employee { get; set; }
+        [ValidateNever]
+ public virtual Employee Employee { get; set; }
     }
 }

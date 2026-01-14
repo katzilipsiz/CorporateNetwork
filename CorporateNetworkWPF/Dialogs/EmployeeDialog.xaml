@@ -1,0 +1,89 @@
+﻿<Window x:Class="CorporateNetworkWPF.Dialogs.EmployeeDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:models="clr-namespace:CorporationNetworkWPF.Models"
+        Title="Добавить сотрудника" 
+        Height="500" 
+        Width="400"
+        WindowStartupLocation="CenterOwner">
+
+    <ScrollViewer>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- ФИО -->
+            <TextBlock Grid.Row="0" Text="ФИО:" Margin="0,0,0,5"/>
+            <TextBox Grid.Row="1" Text="{Binding Employee.FullName, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,0,0,10"/>
+
+            <!-- Код отдела -->
+            <TextBlock Grid.Row="2" Text="Код отдела:" Margin="0,0,0,5"/>
+            <TextBox Grid.Row="3" Text="{Binding Employee.DepartmentCode, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,0,0,10"/>
+
+            <!-- Код должности -->
+            <TextBlock Grid.Row="4" Text="Код должности:" Margin="0,0,0,5"/>
+            <TextBox Grid.Row="5" Text="{Binding Employee.PositionCode, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,0,0,10"/>
+
+            <!-- Рабочий телефон -->
+            <TextBlock Grid.Row="6" Text="Рабочий телефон:" Margin="0,0,0,5"/>
+            <TextBox Grid.Row="7" Text="{Binding Employee.WorkPhone, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,0,0,10"/>
+
+            <!-- Мобильный телефон -->
+            <TextBlock Grid.Row="8" Text="Мобильный телефон:" Margin="0,0,0,5"/>
+            <TextBox Grid.Row="9" Text="{Binding Employee.MobilePhone, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,0,0,10"/>
+
+            <!-- Номер кабинета -->
+            <TextBlock Grid.Row="10" Text="Номер кабинета:" Margin="0,0,0,5"/>
+            <TextBox Grid.Row="11" Text="{Binding Employee.OfficeNumber, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,0,0,10"/>
+
+            <!-- Email -->
+            <TextBlock Grid.Row="12" Text="Email:" Margin="0,0,0,5"/>
+            <TextBox Grid.Row="13" Text="{Binding Employee.Email, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,0,0,10"/>
+
+            <!-- Дата рождения -->
+            <TextBlock Grid.Row="14" Text="Дата рождения (опционально):" Margin="0,0,0,5"/>
+            <DatePicker Grid.Row="15" SelectedDate="{Binding Employee.BirthDate, UpdateSourceTrigger=PropertyChanged}" 
+                       Margin="0,0,0,10"/>
+
+            <!-- Пароль -->
+            <TextBlock Grid.Row="16" Text="Хэш пароля:" Margin="0,0,0,5"/>
+            <TextBox Grid.Row="17" Text="{Binding Employee.PasswordHash, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,0,0,10"/>
+
+            <!-- Дополнительная информация -->
+            <TextBlock Grid.Row="18" Text="Дополнительная информация:" Margin="0,0,0,5"/>
+            <TextBox Grid.Row="19" Text="{Binding Employee.AdditionalInfo, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,0,0,20"
+                     Height="60"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"/>
+
+            <!-- Кнопки -->
+            <StackPanel Grid.Row="20" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="OK" Width="80" Margin="5,0,0,0"
+                        IsDefault="True" Click="OkButton_Click"/>
+                <Button Content="Отмена" Width="80" Margin="5,0,0,0"
+                        IsCancel="True"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>

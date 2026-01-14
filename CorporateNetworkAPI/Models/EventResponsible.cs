@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -11,11 +12,15 @@ namespace CorporateNetwork.Models
 
         [Key, Column(Order = 1)]
         public int EmployeeID { get; set; }
+
         [JsonIgnore]
         [ForeignKey("EventCode")]
-        public virtual required Event Event { get; set; }
+        [ValidateNever]
+ public virtual Event Event { get; set; }
+
         [JsonIgnore]
         [ForeignKey("EmployeeID")]
-        public virtual required Employee Employee { get; set; }
+        [ValidateNever]
+ public virtual Employee Employee { get; set; }
     }
 }

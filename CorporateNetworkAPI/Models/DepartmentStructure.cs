@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -14,14 +15,20 @@ namespace CorporateNetwork.Models
 
         [Key, Column(Order = 2)]
         public int PositionCode { get; set; }
+
         [JsonIgnore]
         [ForeignKey("DepartmentCode")]
-        public virtual required Department Department { get; set; }
+        [ValidateNever]
+ public virtual Department Department { get; set; }
+
         [JsonIgnore]
         [ForeignKey("PersonalNumber")]
-        public virtual required Employee Employee { get; set; }
+        [ValidateNever]
+ public virtual Employee Employee { get; set; }
+
         [JsonIgnore]
         [ForeignKey("PositionCode")]
-        public virtual required Position Position { get; set; }
+        [ValidateNever]
+ public virtual Position Position { get; set; }
     }
 }

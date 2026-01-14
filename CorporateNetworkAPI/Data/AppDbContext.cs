@@ -33,6 +33,29 @@ public class AppDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        // Указываем точные имена таблиц (как в вашей базе)
+        modelBuilder.Entity<MainDepartment>().ToTable("MainDepartment");
+        modelBuilder.Entity<Department>().ToTable("Department");
+        modelBuilder.Entity<Employee>().ToTable("Employee");
+        modelBuilder.Entity<Position>().ToTable("Position");
+        modelBuilder.Entity<Candidate>().ToTable("Candidate");
+        modelBuilder.Entity<Interview>().ToTable("Interview");
+        modelBuilder.Entity<VacationCalendar>().ToTable("VacationCalendar");
+        modelBuilder.Entity<DayOffCalendar>().ToTable("DayOffCalendar");
+        modelBuilder.Entity<TrainingCalendar>().ToTable("TrainingCalendar");
+        modelBuilder.Entity<MaterialType>().ToTable("MaterialType");
+        modelBuilder.Entity<Material>().ToTable("Material");
+        modelBuilder.Entity<TrainingMaterial>().ToTable("TrainingMaterial");
+        modelBuilder.Entity<MaterialAuthor>().ToTable("MaterialAuthor");
+        modelBuilder.Entity<EventStatus>().ToTable("EventStatus");
+        modelBuilder.Entity<EventType>().ToTable("EventType");
+        modelBuilder.Entity<Event>().ToTable("Event");
+        modelBuilder.Entity<EventResponsible>().ToTable("EventResponsible");
+        modelBuilder.Entity<WorkCalendar>().ToTable("WorkCalendar");
+        modelBuilder.Entity<WorkSchedule>().ToTable("WorkSchedule");
+        modelBuilder.Entity<DepartmentStructure>().ToTable("DepartmentStructure");
+
+        // Настройка составных ключей
         modelBuilder.Entity<DepartmentStructure>()
             .HasKey(ds => new { ds.DepartmentCode, ds.PersonalNumber, ds.PositionCode });
 
@@ -47,17 +70,5 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<EventResponsible>()
             .HasKey(er => new { er.EventCode, er.EmployeeID });
-
-        modelBuilder.Entity<Employee>()
-            .HasIndex(e => e.Email)
-            .IsUnique()
-            .HasFilter("[Email] IS NOT NULL");
-
-        modelBuilder.Entity<WorkCalendar>()
-            .HasIndex(wc => wc.CalendarDate)
-            .IsUnique();
-
-        modelBuilder.Entity<Event>()
-            .ToTable("Event");
     }
 }

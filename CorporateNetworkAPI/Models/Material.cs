@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -10,8 +11,9 @@ namespace CorporateNetwork.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MaterialCode { get; set; }
 
+        [Required]
         [MaxLength(200)]
-        public required string MaterialName { get; set; }
+        public string MaterialName { get; set; }
 
         public string? MaterialDescription { get; set; }
 
@@ -22,12 +24,18 @@ namespace CorporateNetwork.Models
 
         [MaxLength(50)]
         public string? Status { get; set; }
+
         [JsonIgnore]
         [ForeignKey("MaterialTypeCode")]
-        public virtual required MaterialType MaterialType { get; set; }
+        [ValidateNever]
+ public virtual MaterialType MaterialType { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<TrainingMaterial> TrainingMaterials { get; set; }
+        [ValidateNever]
+ public virtual ICollection<TrainingMaterial> TrainingMaterials { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<MaterialAuthor> MaterialAuthors { get; set; }
+        [ValidateNever]
+ public virtual ICollection<MaterialAuthor> MaterialAuthors { get; set; }
     }
 }

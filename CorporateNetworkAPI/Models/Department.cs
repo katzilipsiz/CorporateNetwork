@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -12,20 +13,28 @@ namespace CorporateNetwork.Models
 
         public int? MainDepartment { get; set; }
 
+        [Required]
         [MaxLength(100)]
-        public required string DepartmentName { get; set; }
+        public string DepartmentName { get; set; }
 
         [MaxLength(500)]
         public string? Description { get; set; }
 
         [JsonIgnore]
         [ForeignKey("MainDepartment")]
-        public virtual MainDepartment? MainDepartmentNavigation { get; set; }
+        [ValidateNever]
+ public virtual MainDepartment MainDepartmentNavigation { get; set; }
+
         [JsonIgnore]
-        public virtual required ICollection<Employee> Employees { get; set; }
+        [ValidateNever]
+ public virtual ICollection<Employee> Employees { get; set; }
+
         [JsonIgnore]
-        public virtual required ICollection<DepartmentStructure> DepartmentStructures { get; set; }
+        [ValidateNever]
+ public virtual ICollection<DepartmentStructure> DepartmentStructures { get; set; }
+
         [JsonIgnore]
-        public virtual required ICollection<WorkSchedule> WorkSchedules { get; set; }
+        [ValidateNever]
+ public virtual ICollection<WorkSchedule> WorkSchedules { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -11,11 +12,15 @@ namespace CorporateNetwork.Models
 
         [Key, Column(Order = 1)]
         public int MaterialCode { get; set; }
+
         [JsonIgnore]
         [ForeignKey("TrainingCode")]
-        public virtual required TrainingCalendar TrainingCalendar { get; set; }
+        [ValidateNever]
+ public virtual TrainingCalendar TrainingCalendar { get; set; }
+
         [JsonIgnore]
         [ForeignKey("MaterialCode")]
-        public virtual required Material Material { get; set; }
+        [ValidateNever]
+ public virtual Material Material { get; set; }
     }
 }

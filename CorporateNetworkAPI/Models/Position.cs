@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -17,9 +18,13 @@ namespace CorporateNetwork.Models
         [Required]
         [Column(TypeName = "decimal(10,2)")]
         public decimal Salary { get; set; }
+
         [JsonIgnore]
-        public virtual required ICollection<Employee> Employees { get; set; }
+        [ValidateNever]
+ public virtual ICollection<Employee> Employees { get; set; }
+
         [JsonIgnore]
-        public virtual required ICollection<DepartmentStructure> DepartmentStructures { get; set; }
+        [ValidateNever]
+ public virtual ICollection<DepartmentStructure> DepartmentStructures { get; set; }
     }
 }

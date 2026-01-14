@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -13,11 +14,15 @@ namespace CorporateNetwork.Models
         public DateTime InterviewDateTime { get; set; }
 
         public int CandidateNumber { get; set; }
+
         [JsonIgnore]
         [ForeignKey("EmployeeID")]
-        public virtual Employee Employee { get; set; }
+        [ValidateNever]
+ public virtual Employee Employee { get; set; }
+
         [JsonIgnore]
         [ForeignKey("CandidateNumber")]
-        public virtual Candidate Candidate { get; set; }
+        [ValidateNever]
+ public virtual Candidate Candidate { get; set; }
     }
 }

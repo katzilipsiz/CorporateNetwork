@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CorporateNetwork.Models
 {
@@ -10,9 +11,12 @@ namespace CorporateNetwork.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TypeCode { get; set; }
 
+        [Required]
         [MaxLength(100)]
-        public required string TypeName { get; set; }
+        public string TypeName { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<Material> Materials { get; set; }
+        [ValidateNever]
+ public virtual ICollection<Material> Materials { get; set; }
     }
 }
