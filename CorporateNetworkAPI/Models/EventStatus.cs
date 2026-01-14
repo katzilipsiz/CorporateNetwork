@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CorporateNetwork.Models
 {
@@ -11,7 +12,7 @@ namespace CorporateNetwork.Models
 
         [MaxLength(50)]
         public required string StatusName { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<Event> Events { get; set; }
     }
 }

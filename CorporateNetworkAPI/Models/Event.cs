@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CorporateNetwork.Models
 {
@@ -16,13 +17,14 @@ namespace CorporateNetwork.Models
         public required DateTime EventDateTime { get; set; }
 
         [MaxLength(500)]
-        public string ShortDescription { get; set; }
-
+        public string? ShortDescription { get; set; }
+        [JsonIgnore]
         [ForeignKey("StatusCode")]
         public virtual required EventStatus EventStatus { get; set; }
+        [JsonIgnore]
         [ForeignKey("TypeCode")]
         public virtual required EventType EventType { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<EventResponsible> EventResponsibles { get; set; }
     }
 }

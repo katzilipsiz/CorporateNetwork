@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CorporateNetwork.Models
 {
@@ -35,19 +36,25 @@ namespace CorporateNetwork.Models
 
         public string? AdditionalInfo { get; set; }
 
-        // Навигационные свойства
+        [JsonIgnore]
         [ForeignKey("DepartmentCode")]
         public virtual required Department Department { get; set; }
-
+        [JsonIgnore]
         [ForeignKey("PositionCode")]
         public virtual required Position Position { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<DepartmentStructure> DepartmentStructures { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Interview> Interviews { get; set; }
+        [JsonIgnore]
         public virtual ICollection<VacationCalendar> VacationCalendars { get; set; }
+        [JsonIgnore]
         public virtual ICollection<DayOffCalendar> DayOffCalendars { get; set; }
+        [JsonIgnore]
         public virtual ICollection<TrainingCalendar> TrainingCalendars { get; set; }
+        [JsonIgnore]
         public virtual ICollection<MaterialAuthor> MaterialAuthors { get; set; }
+        [JsonIgnore]
         public virtual ICollection<EventResponsible> EventResponsibles { get; set; }
     }
 }

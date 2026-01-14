@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CorporateNetwork.Models
 {
@@ -16,8 +17,9 @@ namespace CorporateNetwork.Models
         [Required]
         [Column(TypeName = "decimal(10,2)")]
         public decimal Salary { get; set; }
-
+        [JsonIgnore]
         public virtual required ICollection<Employee> Employees { get; set; }
+        [JsonIgnore]
         public virtual required ICollection<DepartmentStructure> DepartmentStructures { get; set; }
     }
 }

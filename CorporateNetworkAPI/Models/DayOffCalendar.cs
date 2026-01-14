@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CorporateNetwork.Models
 {
@@ -16,6 +17,7 @@ namespace CorporateNetwork.Models
         [MaxLength(500)]
         public required string Reason { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("EmployeeID")]
         public virtual Employee Employee { get; set; }
     }

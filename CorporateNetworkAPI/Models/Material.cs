@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CorporateNetwork.Models
 {
@@ -21,11 +22,12 @@ namespace CorporateNetwork.Models
 
         [MaxLength(50)]
         public string? Status { get; set; }
-
+        [JsonIgnore]
         [ForeignKey("MaterialTypeCode")]
         public virtual required MaterialType MaterialType { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<TrainingMaterial> TrainingMaterials { get; set; }
+        [JsonIgnore]
         public virtual ICollection<MaterialAuthor> MaterialAuthors { get; set; }
     }
 }

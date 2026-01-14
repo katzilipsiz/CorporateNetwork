@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CorporateNetwork.Models
 {
@@ -10,10 +11,10 @@ namespace CorporateNetwork.Models
 
         [Key, Column(Order = 1)]
         public int EmployeeID { get; set; }
-
+        [JsonIgnore]
         [ForeignKey("MaterialCode")]
         public virtual required Material Material { get; set; }
-
+        [JsonIgnore]
         [ForeignKey("EmployeeID")]
         public virtual required Employee Employee { get; set; }
     }

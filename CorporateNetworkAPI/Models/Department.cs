@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CorporateNetwork.Models
 {
@@ -17,11 +18,14 @@ namespace CorporateNetwork.Models
         [MaxLength(500)]
         public string? Description { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("MainDepartment")]
         public virtual MainDepartment? MainDepartmentNavigation { get; set; }
-
+        [JsonIgnore]
         public virtual required ICollection<Employee> Employees { get; set; }
+        [JsonIgnore]
         public virtual required ICollection<DepartmentStructure> DepartmentStructures { get; set; }
+        [JsonIgnore]
         public virtual required ICollection<WorkSchedule> WorkSchedules { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CorporateNetwork.Models
 {
@@ -29,6 +30,7 @@ namespace CorporateNetwork.Models
 
         public string? AdditionalInfo { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Interview> Interviews { get; set; }
     }
 }
