@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="CorporateNetworkAPI/CorporateNetworkAPI.csproj" />
+  <Project Path="CorporateNetworkWPF/CorporateNetworkWPF.csproj" Id="ede6e8d5-9c03-4a7d-948c-71ab667b6660" />
 </Solution>
